@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>StreakUp — Habit Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+
+<div class="app">
+  <nav>
+    <div class="logo">Streak<span>Up</span></div>
+    <div class="nav-date" id="nav-date"></div>
+  </nav>
+
+  <div class="hero">
+    <h1>Bangun kebiasaan<br /><span class="accent">yang bertahan.</span></h1>
+    <p>Satu hari, satu langkah kecil. Kumpulin streak-mu.</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-label">Total Habit</div>
+      <div class="stat-value" id="s-total">0</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Selesai Hari Ini</div>
+      <div class="stat-value green" id="s-done">0/0</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Streak Terpanjang</div>
+      <div class="stat-value amber" id="s-streak">0 🔥</div>
+    </div>
+  </div>
+
+  <div class="progress-wrap" id="progress-wrap" style="display:none">
+    <div class="progress-label">
+      <span>Progress hari ini</span>
+      <span id="progress-pct">0%</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+    </div>
+  </div>
+
+  <div class="motivation" id="motivation"></div>
+
+  <div class="add-row">
+    <input type="text" id="habit-input" placeholder="Tambah habit baru... (contoh: Baca 20 halaman)" maxlength="50" />
+    <select id="cat-input">
+      <option value="health">❤️ Kesehatan</option>
+      <option value="sport">🏃 Olahraga</option>
+      <option value="study">📖 Belajar</option>
+      <option value="mindful">🧘 Mindful</option>
+      <option value="work">💼 Kerja</option>
+      <option value="other">✨ Lainnya</option>
+    </select>
+    <button class="add-btn" onclick="addHabit()">+ Tambah</button>
+  </div>
+
+  <div class="section-label">Habit aktif</div>
+  <div class="habits-list" id="habits-list"></div>
+
+  <footer>StreakUp &mdash; Mulai kecil, konsisten, menang.</footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
