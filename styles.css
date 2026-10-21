@@ -99,7 +99,7 @@ body::before {
   /* habit cards */
   .habit-card { padding: 0.9rem 1rem; }
   .habit-icon { width: 36px; height: 36px; font-size: 18px; }
-  .habit-name { font-size: 15px; }
+  .habit-name { font-size: 15px; white-space: normal; }
   .habit-sub { font-size: 11px; }
   .streak-pill { font-size: 11px; padding: 3px 7px; }
   .check-btn { width: 34px; height: 34px; font-size: 15px; }
@@ -244,8 +244,10 @@ nav {
 .habit-body { flex: 1; min-width: 0; width: 100%; }
 .habit-name {
   font-family: var(--font-head); font-size: 16px; font-weight: 600;
-  color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  color: var(--text); white-space: normal; overflow: visible;
   width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 .habit-name.done-text { text-decoration: line-through; color: var(--muted); }
 .habit-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
