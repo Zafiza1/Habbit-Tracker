@@ -17,13 +17,13 @@
   --red-bg: rgba(255,94,94,0.1);
   --r: 12px;
   --r2: 18px;
-  --font-head: 'Syne', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
+  --font-head: 'Syne', 'Arial Black', 'Impact', sans-serif;
+  --font-body: 'DM Sans', 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
   font-family: var(--font-body);
@@ -32,6 +32,9 @@ body {
   min-height: 100vh;
   line-height: 1.6;
   overflow-x: hidden;
+  transition: opacity 0.3s ease;
+  width: 100%;
+  max-width: 100vw;
 }
 
 /* noise overlay */
@@ -53,6 +56,8 @@ body::before {
   pointer-events: none;
   z-index: 0;
   animation: float 8s ease-in-out infinite;
+  max-width: 100vw;
+  max-height: 100vh;
 }
 .blob1 { width: 400px; height: 400px; background: rgba(124,107,255,0.12); top: -100px; right: -80px; animation-delay: 0s; }
 .blob2 { width: 300px; height: 300px; background: rgba(29,185,122,0.08); bottom: 10%; left: -60px; animation-delay: -4s; }
@@ -63,7 +68,65 @@ body::before {
 }
 
 /* layout */
-.app { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+.app { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; padding: 2rem 1.5rem 4rem; width: 100%; }
+
+/* Mobile responsive */
+@media (max-width: 480px) {
+  .app { padding: 1.5rem 1rem 3rem; }
+
+  /* nav */
+  nav { margin-bottom: 1.5rem; padding-bottom: 1rem; }
+  .logo { font-size: 16px; }
+  .nav-date { font-size: 11px; }
+
+  /* hero */
+  .hero { margin-bottom: 1.5rem; }
+  .hero h1 { font-size: clamp(20px, 6vw, 28px); letter-spacing: -0.3px; }
+  .hero p { font-size: 13px; }
+
+  /* stats */
+  .stats { gap: 8px; margin-bottom: 1.5rem; }
+  .stat { padding: 0.85rem 0.9rem; }
+  .stat-label { font-size: 9px; }
+  .stat-value { font-size: 18px; }
+
+  /* add row */
+  .add-row { flex-direction: column; padding: 10px; gap: 10px; }
+  .add-row input { font-size: 14px; padding: 8px 12px; }
+  .add-row select { font-size: 12px; padding: 8px 12px; }
+  .add-btn { padding: 10px 20px; font-size: 14px; width: 100%; }
+
+  /* habit cards */
+  .habit-card { padding: 0.9rem 1rem; }
+  .habit-icon { width: 36px; height: 36px; font-size: 18px; }
+  .habit-name { font-size: 15px; }
+  .habit-sub { font-size: 11px; }
+  .streak-pill { font-size: 11px; padding: 3px 7px; }
+  .check-btn { width: 34px; height: 34px; font-size: 15px; }
+  .del-btn { width: 28px; height: 28px; font-size: 14px; }
+
+  /* week dots */
+  .week-row { gap: 4px; margin-top: 10px; padding-top: 10px; }
+  .day-dot { width: 24px; height: 24px; font-size: 10px; }
+  .day-dot.hit { font-size: 12px; }
+  .day-lbl { font-size: 9px; }
+
+  /* section label */
+  .section-label { font-size: 10px; }
+
+  /* progress */
+  .progress-label { font-size: 12px; }
+  .motivation { font-size: 13px; padding: 10px 14px; }
+
+  /* toast */
+  .toast { font-size: 13px; padding: 10px 16px; bottom: 20px; }
+}
+
+/* Tablet */
+@media (min-width: 481px) and (max-width: 768px) {
+  .app { padding: 2rem 2rem 4rem; }
+  .hero h1 { font-size: clamp(26px, 5vw, 32px); }
+}
 
 /* top nav */
 nav {
@@ -72,23 +135,23 @@ nav {
   padding-bottom: 1.25rem;
   border-bottom: 1px solid var(--border);
 }
-.logo { font-family: var(--font-head); font-size: 20px; font-weight: 800; letter-spacing: -0.5px; }
+.logo { font-family: var(--font-head); font-size: 18px; font-weight: 700; letter-spacing: -0.5px; }
 .logo span { color: var(--accent2); }
-.nav-date { font-size: 13px; color: var(--muted); letter-spacing: 0.02em; }
+.nav-date { font-size: 12px; color: var(--muted); letter-spacing: 0.02em; }
 
 /* hero heading */
 .hero { margin-bottom: 2rem; }
 .hero h1 {
   font-family: var(--font-head);
-  font-size: clamp(32px, 6vw, 52px);
-  font-weight: 800;
-  line-height: 1.05;
-  letter-spacing: -1.5px;
+  font-size: clamp(24px, 5vw, 36px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
   color: var(--text);
   margin-bottom: 0.5rem;
 }
 .hero h1 .accent { color: var(--accent2); }
-.hero p { font-size: 15px; color: var(--muted); font-weight: 300; }
+.hero p { font-size: 14px; color: var(--muted); font-weight: 300; }
 
 /* stats row */
 .stats {
@@ -103,8 +166,8 @@ nav {
   transition: border-color 0.2s;
 }
 .stat:hover { border-color: var(--border2); }
-.stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 6px; }
-.stat-value { font-family: var(--font-head); font-size: 28px; font-weight: 700; color: var(--text); }
+.stat-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 6px; }
+.stat-value { font-family: var(--font-head); font-size: 22px; font-weight: 700; color: var(--text); }
 .stat-value.green { color: var(--green); }
 .stat-value.amber { color: var(--amber); }
 
@@ -150,7 +213,7 @@ nav {
 .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
 /* habit cards */
-.habits-list { display: flex; flex-direction: column; gap: 8px; }
+.habits-list { display: flex; flex-direction: column; gap: 8px; width: 100%; }
 
 .habit-card {
   background: var(--surface);
@@ -159,6 +222,8 @@ nav {
   padding: 1rem 1.25rem;
   transition: border-color 0.2s, background 0.2s;
   animation: slideIn 0.3s ease;
+  width: 100%;
+  overflow: hidden;
 }
 .habit-card:hover { border-color: var(--border2); }
 .habit-card.done { border-color: rgba(29,185,122,0.3); background: rgba(29,185,122,0.04); }
@@ -168,7 +233,7 @@ nav {
   to { opacity: 1; transform: translateY(0); }
 }
 
-.habit-main { display: flex; align-items: center; gap: 12px; }
+.habit-main { display: flex; align-items: center; gap: 12px; width: 100%; min-width: 0; }
 
 .habit-icon {
   width: 40px; height: 40px; border-radius: var(--r); flex-shrink: 0;
@@ -176,10 +241,11 @@ nav {
   font-size: 20px; border: 1px solid var(--border);
 }
 
-.habit-body { flex: 1; min-width: 0; }
+.habit-body { flex: 1; min-width: 0; width: 100%; }
 .habit-name {
   font-family: var(--font-head); font-size: 16px; font-weight: 600;
   color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  width: 100%;
 }
 .habit-name.done-text { text-decoration: line-through; color: var(--muted); }
 .habit-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
@@ -275,4 +341,11 @@ nav {
 footer {
   margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
   text-align: center; font-size: 12px; color: var(--muted);
+}
+
+/* Desktop large screens */
+@media (min-width: 1200px) {
+  .app { max-width: 800px; padding: 3rem 2rem 5rem; }
+  .hero h1 { font-size: 40px; }
+  .stat-value { font-size: 26px; }
 }

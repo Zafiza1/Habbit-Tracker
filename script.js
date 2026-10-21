@@ -1,3 +1,15 @@
+// Font loading detection
+if ('fonts' in document) {
+  document.fonts.ready.then(() => {
+    document.body.style.opacity = '1';
+  });
+} else {
+  // Fallback for browsers that don't support FontFace API
+  window.addEventListener('load', () => {
+    document.body.style.opacity = '1';
+  });
+}
+
 const CAT = {
   health:  { emoji: '❤️', label: 'Kesehatan' },
   sport:   { emoji: '🏃', label: 'Olahraga' },
